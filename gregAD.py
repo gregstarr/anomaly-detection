@@ -12,7 +12,7 @@ tic = time()
 
 
 #KNN
-l = 1000    #total groups
+l = 4000    #total groups
 d = 2       #dimension of data
 n = 100     #number of points per group
 ap = .02    #percentage of groups that are anomalous
@@ -167,7 +167,7 @@ pred = np.empty_like(y)
 for i in range(l):
     pred[i] = np.sum(knn_score[i]>knn_score)/l > .1
     
-print('precision: {}, fallout: {}'.format(np.sum(np.logical_and(pred==0,y==-1))/np.sum(y==-1),
+print('TRAINING DATA ==> precision: {0:4.3f}, fallout: {0:4.3f}'.format(np.sum(np.logical_and(pred==0,y==-1))/np.sum(y==-1),
       np.sum(np.logical_and(pred==0,y==1))/np.sum(y==1)))
     
 plt.figure()
@@ -257,7 +257,7 @@ for i in range(l):
         else:
             plt.plot(data[i,:,0],data[i,:,1],'r.')
             
-print('precision: {}, fallout: {}'.format(np.sum(np.logical_and(pred==0,y==-1))/np.sum(y==-1),
+print('TEST DATA ==> precision: {0:4.3f}, fallout: {0:4.3f}'.format(np.sum(np.logical_and(pred==0,y==-1))/np.sum(y==-1),
       np.sum(np.logical_and(pred==0,y==1))/np.sum(y==1)))
             
 print('time: '+str(time()-tic))
