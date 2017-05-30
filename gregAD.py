@@ -4,7 +4,6 @@ if 'PYTHONSTARTUP' in os.environ:
     matplotlib.use('TkAgg')
 import numpy as np
 from sklearn.metrics.pairwise import rbf_kernel
-from sklearn.svm import SVC
 import matplotlib.pyplot as plt
 plt.style.use('ggplot')
 import itertools
