@@ -10,7 +10,7 @@ import numpy as np
 from scipy.sparse.linalg import LinearOperator, minres
 
 def ranksvm_k(K,A,C,beta=None,
-              iter_max_newton=100,
+              iter_max_newton=200,
               prec=1.0e-4,
               cg_prec=1.0e-3,
               cg_it=50):
@@ -51,7 +51,7 @@ def ranksvm_k(K,A,C,beta=None,
         
         it += 1
         if it > iter_max_newton:
-            print('max number of newton steps')
+            print('\nmax number of newton steps')
             break
         
         obj,grad,sv = obj_fun_linear(beta,C,out)
@@ -72,9 +72,13 @@ def ranksvm_k(K,A,C,beta=None,
         
         beta = beta + t*step[:,None]
                 
-        print('It = {:2d}, Ob = {:10.4f}, N sv = {:4d}, Nsv2 = {:6d}, Decr: {:10.5f}, Lsearch: {:5.3f}'.format(it,obj[0,0],np.sum(actual_sv),np.sum(out<0),(-step.T.dot(grad)/2)[0],t[0,0]))
+        print('It = {:3d}, Ob = {:12.4f}, N sv = {:4d}, Nsv2 = {:6d}, '
+              'Decr: {:11.5f}, Lsearch: {:5.3f}'.format(it,obj[0,0],
+              np.sum(actual_sv),np.sum(out<0),(-step.T.dot(grad)/2)[0],
+              t[0,0]),end='\r')
                 
         if -step.T.dot(grad) < prec * obj:
+            print()
             break
         
     return beta,actual_sv

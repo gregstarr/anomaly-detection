@@ -59,7 +59,7 @@ def make_kmat(X,Y=None,bw=.005):
         K[i,j] = np.sum(rbf_kernel(X[i,:,:],
                                    Y[j,:,:],
                                    gamma = .5/bw))/(X.shape[1]*Y.shape[1])
-    
+    print()
     return K
 
 
