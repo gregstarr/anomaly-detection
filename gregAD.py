@@ -1,11 +1,7 @@
-import os
-if 'PYTHONSTARTUP' in os.environ:
-    import matplotlib
-    matplotlib.use('TkAgg')
+
 import numpy as np
 from sklearn.metrics.pairwise import rbf_kernel
-import matplotlib.pyplot as plt
-plt.style.use('ggplot')
+
 import itertools
 from time import time
 
@@ -74,7 +70,12 @@ def knn_score(K,knn=3):
 
 
 if __name__ == "__main__":
-    
+    import os
+    if 'PYTHONSTARTUP' in os.environ:
+        import matplotlib
+        matplotlib.use('TkAgg')
+    import matplotlib.pyplot as plt
+    plt.style.use('ggplot')
     from argparse import ArgumentParser
     descr = "Anomaly Detection"
 
